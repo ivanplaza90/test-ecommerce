@@ -1,0 +1,23 @@
+plugins {
+	id "java"
+	id "org.springframework.boot" version "${spring_version}"
+	id "io.spring.dependency-management" version "${spring_dependency_management_version}"
+}
+
+group = 'com.ivan.test'
+version = '0.0.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
