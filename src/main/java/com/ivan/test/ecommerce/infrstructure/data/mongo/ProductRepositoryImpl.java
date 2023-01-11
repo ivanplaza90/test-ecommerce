@@ -4,15 +4,17 @@ import com.ivan.test.ecommerce.domain.ProductRepository;
 import com.ivan.test.ecommerce.domain.model.Product;
 import com.ivan.test.ecommerce.domain.model.ProductSize;
 import com.ivan.test.ecommerce.infrstructure.data.mongo.mapper.EntityMapper;
+import com.ivan.test.ecommerce.infrstructure.data.mongo.model.SizeEntity;
+import com.ivan.test.ecommerce.infrstructure.data.mongo.model.StockEntity;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ProductRepositoryImpl implements ProductRepository {
 
     private ProductMongoRepository productMongoRepository;
     private SizeMongoRepository sizeMongoRepository;
-
     private StockMongoRepository stockMongoRepository;
     private EntityMapper entityMapper;
     @Override
@@ -23,7 +25,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     private List<ProductSize> getProductSizes(Integer productId) {
-        return entityMapper.mapToProductSizes(
-                sizeMongoRepository.findByProductId(productId));
+        return sizeMongoRepository.findByProductId(productId).stream()
+            .map(sizeEntity -> entityMapper.mapToProductSize(sizeEntity, getStockMongoRepositoryBySizeId(sizeEntity)))
+            .collect(Collectors.toList());
+    }
+
+    private StockEntity getStockMongoRepositoryBySizeId(SizeEntity sizeEntity) {
+        return stockMongoRepository.findBySizeId(sizeEntity.getSizeId());
     }
 }
