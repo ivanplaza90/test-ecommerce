@@ -108,7 +108,8 @@ class ProductRepositoryImplTest {
 
         then(productMongoRepository).should().findByProductId(eq(PRODUCT_ID));
         then(sizeMongoRepository).should().findByProductId(PRODUCT_ID);
-        then(entityMapper).should().mapToProduct(eq(storedProduct), eq(storedSizes));
+        then(entityMapper).should().mapToProduct(eq(storedProduct));
+        then(entityMapper).should().mapToProductSizes(eq(storedSizes));
     }
 
 
