@@ -2,5 +2,5 @@
 
 # Change Log
 
-##Version 0.0.0-SNAPSHOT
+##Version 0.0.0.RELEASE
 * Empty spring boot service
