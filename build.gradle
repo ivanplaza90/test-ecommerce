@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.ivan.test'
-version = '0.0.0.RELEASE'
+version = '0.1.0-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
