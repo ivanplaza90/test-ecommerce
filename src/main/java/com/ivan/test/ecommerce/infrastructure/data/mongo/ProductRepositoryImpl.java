@@ -1,11 +1,11 @@
-package com.ivan.test.ecommerce.infrstructure.data.mongo;
+package com.ivan.test.ecommerce.infrastructure.data.mongo;
 
 import com.ivan.test.ecommerce.domain.ProductRepository;
 import com.ivan.test.ecommerce.domain.model.Product;
 import com.ivan.test.ecommerce.domain.model.ProductSize;
-import com.ivan.test.ecommerce.infrstructure.data.mongo.mapper.EntityMapper;
-import com.ivan.test.ecommerce.infrstructure.data.mongo.model.SizeEntity;
-import com.ivan.test.ecommerce.infrstructure.data.mongo.model.StockEntity;
+import com.ivan.test.ecommerce.infrastructure.data.mongo.mapper.EntityMapper;
+import com.ivan.test.ecommerce.infrastructure.data.mongo.model.SizeEntity;
+import com.ivan.test.ecommerce.infrastructure.data.mongo.model.StockEntity;
 
 import java.util.List;
 import java.util.Optional;

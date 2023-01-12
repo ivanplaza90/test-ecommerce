@@ -1,10 +1,10 @@
-package com.ivan.test.ecommerce.infrstructure.data.mongo;
+package com.ivan.test.ecommerce.infrastructure.data.mongo;
 
 import com.ivan.test.ecommerce.domain.model.Product;
-import com.ivan.test.ecommerce.infrstructure.data.mongo.mapper.EntityMapper;
-import com.ivan.test.ecommerce.infrstructure.data.mongo.model.ProductEntity;
-import com.ivan.test.ecommerce.infrstructure.data.mongo.model.SizeEntity;
-import com.ivan.test.ecommerce.infrstructure.data.mongo.model.StockEntity;
+import com.ivan.test.ecommerce.infrastructure.data.mongo.model.ProductEntity;
+import com.ivan.test.ecommerce.infrastructure.data.mongo.model.SizeEntity;
+import com.ivan.test.ecommerce.infrastructure.data.mongo.model.StockEntity;
+import com.ivan.test.ecommerce.infrastructure.data.mongo.mapper.EntityMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
