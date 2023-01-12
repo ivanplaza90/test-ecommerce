@@ -1,4 +1,4 @@
-package com.ivan.test.ecommerce.infrstructure.data.mongo.model;
+package com.ivan.test.ecommerce.infrastructure.data.mongo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
