@@ -130,8 +130,8 @@ class GetProductsWithStockTest {
 
         //THEN
         assertThat(response).isNotNull()
-                .asList().hasSize(1)
-                .first().isNotNull().isEqualTo(2);
+            .asList().hasSize(1)
+            .first().isNotNull().isEqualTo(2);
         then(productRepository).should().getProducts();
     }
 
@@ -150,7 +150,7 @@ class GetProductsWithStockTest {
 
         //THEN
         assertThat(response).isNotNull()
-                .asList().hasSize(0);
+            .asList().hasSize(0);
         then(productRepository).should().getProducts();
     }
 
@@ -169,8 +169,8 @@ class GetProductsWithStockTest {
 
         //THEN
         assertThat(response).isNotNull()
-                .asList().hasSize(1)
-                .first().isNotNull().isEqualTo(2);
+            .asList().hasSize(1)
+            .first().isNotNull().isEqualTo(2);
         then(productRepository).should().getProducts();
     }
     @Test
