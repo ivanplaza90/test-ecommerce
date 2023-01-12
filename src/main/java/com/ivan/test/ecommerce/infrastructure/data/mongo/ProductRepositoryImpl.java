@@ -6,11 +6,16 @@ import com.ivan.test.ecommerce.domain.model.ProductSize;
 import com.ivan.test.ecommerce.infrastructure.data.mongo.mapper.EntityMapper;
 import com.ivan.test.ecommerce.infrastructure.data.mongo.model.SizeEntity;
 import com.ivan.test.ecommerce.infrastructure.data.mongo.model.StockEntity;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+@Component
+@AllArgsConstructor
 public class ProductRepositoryImpl implements ProductRepository {
 
     private ProductMongoRepository productMongoRepository;

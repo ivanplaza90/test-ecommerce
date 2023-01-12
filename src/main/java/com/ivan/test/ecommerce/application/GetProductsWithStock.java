@@ -4,7 +4,9 @@ import com.ivan.test.ecommerce.domain.ProductRepository;
 import com.ivan.test.ecommerce.domain.exception.EcommerceException;
 import com.ivan.test.ecommerce.domain.model.Product;
 import com.ivan.test.ecommerce.domain.model.ProductSize;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +15,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Component
+@AllArgsConstructor
 public class GetProductsWithStock {
 
     private static final Predicate<Product> PRODUCT_WITH_SIZES =

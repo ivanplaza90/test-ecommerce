@@ -1,0 +1,10 @@
+server:
+    port: 8080
+
+spring:
+  application:
+      name: test-ecommerce
+  profiles: integration-tests
+  mongodb:
+    embedded:
+      version: 3.4.24
