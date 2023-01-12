@@ -25,11 +25,12 @@ public class GetProductsWithStock {
             size -> size.getQuantity() > 0 || size.isBackSoon() || size.isSpecial();
 
     private ProductRepository productRepository;
-    public List<Product> get() {
+    public List<Integer> get() {
         return getStoredProducts().stream()
                 .filter(PRODUCT_WITH_SIZES)
                 .filter(product -> getSizesWithStock(product.getSizes()).size() > 0)
                 .sorted(Comparator.comparing(Product::getPosition))
+                .map(Product::getProductId)
                 .collect(Collectors.toList());
     }
 

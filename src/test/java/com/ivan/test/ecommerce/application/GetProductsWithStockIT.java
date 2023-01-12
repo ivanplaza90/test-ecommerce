@@ -37,17 +37,20 @@ class GetProductsWithStockIT {
 
 
     @Test
-    void should_get_a_list_of_product_given_not_params_when_the_database_has_data() throws IOException {
+    void should_get_a_list_of_products_given_not_params_when_the_database_has_data() throws IOException {
         //GIVEN
         productMongoRepository.saveAll(loadProductsFromFile());
         sizeMongoRepository.saveAll(loadSizesFromFile());
         stockMongoRepository.saveAll(loadStockFromFile());
 
         //WHEN
-        final List<Product> products = getProductsWithStock.get();
+        final List<Integer> products = getProductsWithStock.get();
 
         //THEN
         assertThat(products).isNotNull().asList().hasSize(3);
+        assertThat(products.get(0)).isNotNull().isEqualTo(5);
+        assertThat(products.get(1)).isNotNull().isEqualTo(1);
+        assertThat(products.get(2)).isNotNull().isEqualTo(3);
     }
 
     private List<StockEntity> loadStockFromFile() throws IOException {

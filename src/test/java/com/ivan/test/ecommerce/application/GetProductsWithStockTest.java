@@ -49,7 +49,7 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(Collections.emptyList());
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull()
@@ -68,7 +68,7 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(storedProductsWithoutSizes);
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull()
@@ -87,7 +87,7 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(storedProductsWithoutStock);
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull()
@@ -106,12 +106,12 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(storedProductsWithStockProduct);
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull()
             .asList().hasSize(1)
-            .first().isNotNull().isEqualTo(storedProductsWithStockProduct.get(1));
+            .first().isNotNull().isEqualTo(2);
         then(productRepository).should().getProducts();
     }
 
@@ -126,12 +126,12 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(storedProductsWithBackSoonProduct);
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull()
                 .asList().hasSize(1)
-                .first().isNotNull().isEqualTo(storedProductsWithBackSoonProduct.get(1));
+                .first().isNotNull().isEqualTo(2);
         then(productRepository).should().getProducts();
     }
 
@@ -146,7 +146,7 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(storedProductsWithSpecialProduct);
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull()
@@ -165,12 +165,12 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(storedProductsWithSpecialProduct);
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull()
                 .asList().hasSize(1)
-                .first().isNotNull().isEqualTo(storedProductsWithSpecialProduct.get(1));
+                .first().isNotNull().isEqualTo(2);
         then(productRepository).should().getProducts();
     }
     @Test
@@ -184,12 +184,12 @@ class GetProductsWithStockTest {
         given(productRepository.getProducts()).willReturn(storedProductsWithStock);
 
         //WHEN
-        final List<Product> response = getProductsWithStock.get();
+        final List<Integer> response = getProductsWithStock.get();
 
         //THEN
         assertThat(response).isNotNull().asList().hasSize(2);
-        assertThat(response.get(0)).isNotNull().isEqualTo(storedProductsWithStock.get(1));
-        assertThat(response.get(1)).isNotNull().isEqualTo(storedProductsWithStock.get(0));
+        assertThat(response.get(0)).isNotNull().isEqualTo(2);
+        assertThat(response.get(1)).isNotNull().isEqualTo(1);
         then(productRepository).should().getProducts();
     }
 
