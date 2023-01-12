@@ -7,7 +7,6 @@ import com.ivan.test.ecommerce.domain.model.ProductSize;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
 import java.util.Comparator;
