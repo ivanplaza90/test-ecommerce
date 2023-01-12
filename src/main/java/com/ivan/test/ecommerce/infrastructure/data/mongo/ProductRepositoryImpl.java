@@ -1,6 +1,7 @@
 package com.ivan.test.ecommerce.infrastructure.data.mongo;
 
 import com.ivan.test.ecommerce.domain.ProductRepository;
+import com.ivan.test.ecommerce.domain.exception.EcommerceException;
 import com.ivan.test.ecommerce.domain.model.Product;
 import com.ivan.test.ecommerce.domain.model.ProductSize;
 import com.ivan.test.ecommerce.infrastructure.data.mongo.mapper.EntityMapper;
@@ -22,6 +23,11 @@ public class ProductRepositoryImpl implements ProductRepository {
         return productMongoRepository.findByProductId(productId)
             .map(entityMapper::mapToProduct)
             .map(product -> product.withSizes(getProductSizes(productId)));
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        throw new EcommerceException("WIP");
     }
 
     private List<ProductSize> getProductSizes(Integer productId) {

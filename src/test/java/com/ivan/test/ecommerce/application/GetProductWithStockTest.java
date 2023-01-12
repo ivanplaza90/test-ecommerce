@@ -26,7 +26,7 @@ import static org.mockito.BDDMockito.then;
 class GetProductWithStockTest {
 
     private static final Integer PRODUCT_ID = 1;
-    public static final int POSITION = 0;
+    private static final int POSITION = 0;
 
     @Mock
     private ProductRepository productRepository;
