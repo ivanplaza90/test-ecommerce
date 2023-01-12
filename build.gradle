@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.ivan.test'
-version = '0.0.0.RELEASE'
+version = '0.1.0.RELEASE'
 sourceCompatibility = '17'
 
 repositories {
@@ -13,9 +13,18 @@ repositories {
 }
 
 dependencies {
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
+
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	implementation "org.mapstruct:mapstruct:${mapstruct_version}"
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 }
 
 tasks.named('test') {
