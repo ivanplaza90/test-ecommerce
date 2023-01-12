@@ -171,6 +171,98 @@ class ProductRepositoryImplTest {
         then(entityMapper).should().mapToProductSize(eq(storedSizes.get(0)), eq(stockEntity));
     }
 
+    @Test
+    void should_throws_an_exception_given_not_params_when_mongo_repository_fails_while_get_products() {
+        //GIVEN
+        assertThat(productRepositoryImpl).isNotNull();
+        final RuntimeException repositoryException = new RuntimeException("UNIT TEST");
+
+        given(productMongoRepository.findAll()).willThrow(repositoryException);
+
+        //WHEN
+        final Throwable throwable = catchThrowable(() -> productRepositoryImpl.getProducts());
+
+        //THEN
+        assertThat(throwable).isNotNull()
+                .isEqualTo(repositoryException);
+        then(productMongoRepository).should().findAll();
+    }
+
+    @Test
+    void should_return_an_empty_list_given_not_params_when_mongo_repository_returns_empty_list() {
+        //GIVEN
+        assertThat(productRepositoryImpl).isNotNull();
+
+        given(productMongoRepository.findAll()).willReturn(Collections.emptyList());
+
+        //WHEN
+        final List<Product> response = productRepositoryImpl.getProducts();
+
+        //THEN
+        assertThat(response).isNotNull().asList().isEmpty();
+        then(productMongoRepository).should().findAll();
+    }
+
+    @Test
+    void should_return_list_given_not_params_when_mongo_returns_a_product_and_not_sizes_then_the_list_has_the_element() {
+        //GIVEN
+        assertThat(productRepositoryImpl).isNotNull();
+
+        final ProductEntity storedProduct = mockProduct();
+        final List<SizeEntity> storedSizes = Collections.emptyList();
+
+        given(productMongoRepository.findAll()).willReturn(List.of(storedProduct));
+        given(sizeMongoRepository.findByProductId(PRODUCT_ID)).willReturn(storedSizes);
+
+        //WHEN
+        final List<Product> response = productRepositoryImpl.getProducts();
+
+        //THEN
+        assertThat(response).isNotNull().asList().hasSize(1)
+            .element(0).isNotNull()
+            .hasFieldOrPropertyWithValue("productId", PRODUCT_ID)
+            .hasFieldOrPropertyWithValue("position", POSITION);
+
+        then(productMongoRepository).should().findAll();
+        then(entityMapper).should().mapToProduct(eq(storedProduct));
+        then(sizeMongoRepository).should().findByProductId(eq(PRODUCT_ID));
+    }
+
+    @Test
+    void should_return_list_given_not_params_when_mongo_returns_a_product_with_sizes_and_stock_then_the_list_has_the_element() {
+        //GIVEN
+        assertThat(productRepositoryImpl).isNotNull();
+
+        final ProductEntity storedProduct = mockProduct();
+        final List<SizeEntity> storedSizes = List.of(mockSizeEntity());
+        final StockEntity stockEntity = mockStockEntity();
+
+        given(productMongoRepository.findAll()).willReturn(List.of(storedProduct));
+        given(sizeMongoRepository.findByProductId(PRODUCT_ID)).willReturn(storedSizes);
+        given(stockMongoRepository.findBySizeId(SIZE_ID)).willReturn(stockEntity);
+
+        //WHEN
+        final List<Product> response = productRepositoryImpl.getProducts();
+
+        //THEN
+        assertThat(response).isNotNull().asList().hasSize(1)
+                .element(0).isNotNull()
+                .hasFieldOrPropertyWithValue("productId", PRODUCT_ID)
+                .hasFieldOrPropertyWithValue("position", POSITION)
+                .hasFieldOrProperty("sizes")
+                .extracting("sizes").isNotNull().asList().hasSize(1).first()
+                .hasFieldOrPropertyWithValue("sizeId", SIZE_ID)
+                .hasFieldOrPropertyWithValue("quantity", QUANTITY)
+                .hasFieldOrPropertyWithValue("backSoon", false)
+                .hasFieldOrPropertyWithValue("special", false);
+
+        then(productMongoRepository).should().findAll();
+        then(sizeMongoRepository).should().findByProductId(PRODUCT_ID);
+        then(stockMongoRepository).should().findBySizeId(SIZE_ID);
+        then(entityMapper).should().mapToProduct(eq(storedProduct));
+        then(entityMapper).should().mapToProductSize(eq(storedSizes.get(0)), eq(stockEntity));
+    }
+
     private ProductEntity mockProduct() {
         return ProductEntity.builder()
             .productId(PRODUCT_ID)

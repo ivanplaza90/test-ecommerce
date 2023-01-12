@@ -4,6 +4,9 @@ import com.ivan.test.ecommerce.domain.ProductRepository;
 import com.ivan.test.ecommerce.domain.exception.EcommerceException;
 import com.ivan.test.ecommerce.domain.model.Product;
 import com.ivan.test.ecommerce.domain.model.ProductSize;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
@@ -13,6 +16,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Component
+@AllArgsConstructor
 public class GetProductsWithStock {
 
     private static final Predicate<Product> PRODUCT_WITH_SIZES =
@@ -21,11 +26,12 @@ public class GetProductsWithStock {
             size -> size.getQuantity() > 0 || size.isBackSoon() || size.isSpecial();
 
     private ProductRepository productRepository;
-    public List<Product> get() {
+    public List<Integer> get() {
         return getStoredProducts().stream()
                 .filter(PRODUCT_WITH_SIZES)
                 .filter(product -> getSizesWithStock(product.getSizes()).size() > 0)
                 .sorted(Comparator.comparing(Product::getPosition))
+                .map(Product::getProductId)
                 .collect(Collectors.toList());
     }
 
